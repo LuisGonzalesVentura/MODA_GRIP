@@ -1,0 +1,375 @@
+.work-sans {
+    font-family: 'Work Sans', sans-serif;
+}
+
+#menu-toggle:checked+#menu {
+    display: block;
+}
+
+.hover\:grow {
+    transition: all 0.3s;
+    transform: scale(1);
+}
+
+.hover\:grow:hover {
+    transform: scale(1.02);
+}
+
+.carousel-open:checked+.carousel-item {
+    position: static;
+    opacity: 100;
+}
+
+.carousel-item {
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+}
+
+#carousel-1:checked~.control-1,
+#carousel-2:checked~.control-2,
+#carousel-3:checked~.control-3 {
+    display: block;
+}
+
+.carousel-indicators {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+
+#carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+#carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+#carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+    color: #000;
+}
+
+.logo-nav {
+    max-width: 100%;
+    height: auto;
+}
+
+.blogger {
+    display: none;
+}
+
+.navHidden {
+    visibility: hidden;
+}
+
+img {
+    border-radius: 12px;
+}
+
+.img {
+    border-radius: 5px;
+}
+
+/* vietnamese */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_c6DptfpA4cD3.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_cqDptfpA4cD3.woff2) format('woff2');
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_fKDptfpA4Q.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* vietnamese */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_c6DptfpA4cD3.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_cqDptfpA4cD3.woff2) format('woff2');
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/worksans/v18/QGYsz_wNahGAdqQ43Rh_fKDptfpA4Q.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.scroll-left {
+    height: 33px;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+}
+
+
+
+.scroll-left p {
+    color: #fff;
+    font-weight: 400;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-size: 16px;
+    line-height: 33px;
+    text-align: center;
+    /* Apply animation */
+    -moz-animation: scroll-left 20s linear infinite;
+    -webkit-animation: scroll-left 20 linear infinite;
+    animation: scroll-left 20s linear infinite;
+}
+
+/* Define the animation */
+@-moz-keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(0%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes scroll-left {
+    0% {
+        -webkit-transform: translateX(0%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+
+.top-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    border-bottom:  2px solid black;
+}
+
+.navigation-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: 65px;
+    background-color: #fff;
+}
+
+@font-face {
+    font-family: 'Arkhip';
+    src: url('/assets/fonts/arkhip.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.arkhip {
+    font-family: 'arkhip';
+    font-size: 54px;
+    color: #000;
+    letter-spacing: 0.1ch;
+    font-display: fallback;
+}
+
+.arkhip_sub {
+    font-family: 'arkhip';
+    font-size: 30px;
+    color: #000;
+    font-display: fallback;
+}
+
+.arkhip_text {
+    font-family: 'arkhip';
+    font-size: 24px;
+    color: #000;
+    font-display: fallback;
+}
+
+
+/* Estilos generales para el cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal del login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px; /* Ajusta el padding si es necesario */
+}
+
+
+
+/* Ajustes de la caja del login */
+.login-box {
+    position: relative; /* Necesario para el posicionamiento absoluto del ::before */
+    padding-top: 30px; /* Asegúrate de que haya suficiente espacio para la barra */
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 800px; /* Ajusta este valor para hacer la caja más ancha */
+    max-width: 100%; /* Asegúrate de que la caja no exceda el ancho del contenedor */
+    margin: auto;
+    padding: 40px; /* Ajusta este valor para aumentar el espacio interno */
+
+}
+
+/* Barra negra debajo del h1 */
+.login-box::before {
+    content: "";
+    position: absolute;
+    top: 90px; /* Ajusta esta propiedad para mover la barra debajo del h1 */
+    left: 0;
+    width: 100%;
+    height: 3px; /* Tamaño de la barra superior */
+    background-color: #000; /* Color negro */
+    border-top-right-radius: 200px;
+    z-index: 1; /* Asegúrate de que la barra esté sobre el fondo y debajo del contenido */
+}
+
+
+/* Grupos de input */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Etiquetas */
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+    /* Campos de entrada (inputs) */
+    .input-group input {
+        width: calc(100% - 0px); /* Ajusta el ancho para compensar el padding y el border */
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #333;
+        background-color: hsl(0, 0%, 84%);
+        box-sizing: border-box; /* Asegúrate de que el padding y el border se incluyan en el ancho total */
+
+    }
+
+/* Botón de enviar */
+.submit-btn {
+    background-color: #333; /* Fondo del botón en gris oscuro */
+    color: #fff; /* Texto en color blanco */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.submit-btn:hover {
+    background-color: #555;
+}
+
+/* Enlace de contraseña olvidada */
+.forgot-password {
+    display: block;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Mensaje de error */
+.error {
+    color: red;
+    margin-bottom: 15px;
+}
+
+/* Ajustes de la caja del login para coincidir con la imagen */
+.login-box {
+    border-radius: 15px;
+    background-color: #e0e0e0;
+    padding: 40px;
+    max-width: 354px;
+    margin: auto;
+}
+
+/* Otros estilos para el login */
+.login-box h1 {
+    font-family: 'Arkhip', sans-serif;
+    font-size: 28px;
+    color: #000000;
+    margin-top: 5px; /* Ajusta este valor para mover el h1 más arriba o abajo */
+    margin-bottom: 20px; /* Ajusta este valor para el espaciado debajo del h1 */
+}
+
+

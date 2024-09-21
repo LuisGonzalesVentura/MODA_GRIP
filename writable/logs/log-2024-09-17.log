@@ -1,0 +1,459 @@
+CRITICAL - 2024-09-17 12:03:03 --> ParseError: Unmatched '}'
+[Method: GET, Route: login]
+in APPPATH\Controllers\login.php on line 50.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xamppp\\htdocs\\MODA_URBANA\\app\\Controllers\\Login.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(272): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Login')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Login')
+ 4 SYSTEMPATH\CodeIgniter.php(887): class_exists('\\App\\Controllers\\Login', true)
+ 5 SYSTEMPATH\CodeIgniter.php(496): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:17:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:18:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:18:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 12:18:36 --> Error: Class "App\Models\LoginAdmin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:19:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 12:19:40 --> Error: Class "App\Models\LoginAdmin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:20:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 12:20:41 --> Error: Class "App\Models\login_admin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:22:10 --> Error: Class "App\Models\login_admin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-09-17 12:23:17 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:23:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:23:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 12:23:23 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:23:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:23:58 --> Error: Class "App\Models\login_admin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:27:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 12:27:33 --> Error: Class "App\Models\LoginAdmin" not found
+[Method: POST, Route: login]
+in APPPATH\Controllers\login.php on line 18.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 2 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-09-17 12:30:09 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:30:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:30:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 12:30:16 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:30:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:34:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-17 12:34:36 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:34:36 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2024-09-17 12:36:20 --> Error connecting to the database: mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:187
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php(187): mysqli->real_connect('localhost', '', '', '', 3306, '', 0)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#6 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#9 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user ''@'localhost' (using password: NO) in C:\xamppp\htdocs\MODA_URBANA\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xamppp\htdocs\MODA_URBANA\system\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xamppp\htdocs\MODA_URBANA\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xamppp\htdocs\MODA_URBANA\system\BaseModel.php(714): CodeIgniter\Model->doFirst()
+#5 C:\xamppp\htdocs\MODA_URBANA\app\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+#6 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+#7 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+#8 C:\xamppp\htdocs\MODA_URBANA\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#10 C:\xamppp\htdocs\MODA_URBANA\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xamppp\htdocs\MODA_URBANA\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2024-09-17 12:36:20 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user ''@'localhost' (using password: NO)
+[Method: POST, Route: login]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(616): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1636): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `login_admin`
+WHERE `usuario_login` IS NULL
+ LIMIT 1', [], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(714): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\login.php(25): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->validarIngreso()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:40:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:40:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:41:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:42:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:42:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:42:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:43:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:43:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:44:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:44:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:44:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:45:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:46:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:47:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:47:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:49:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:49:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-17 12:49:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-17 12:51:07 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\login.php(12): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:54:33 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\login.php(12): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:54:40 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\login.php(12): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:54:42 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\login.php(12): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-09-17 12:55:29 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('login.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('login', [], true)
+ 3 APPPATH\Controllers\login.php(12): view('login')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Login->index()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Login))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-17 12:56:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
