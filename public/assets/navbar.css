@@ -113,7 +113,7 @@
     }
 
     .arkhip h1 {
-        font-size: 20   px; /* Ajusta el tamaño del título para pantallas más pequeñas */
+        font-size: 20px; /* Ajusta el tamaño del título para pantallas más pequeñas */
         position: relative; /* Alinea el título con el flujo del documento */
         margin: 0 15% 20px 0; /* Ajusta el margen para mover el título hacia la izquierda y abajo */
         text-align: right; /* Alinea el texto a la derecha dentro del contenedor */
