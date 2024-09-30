@@ -372,4 +372,8 @@ body {
     margin-bottom: 20px; /* Ajusta este valor para el espaciado debajo del h1 */
 }
 
-
+@media (max-width: 768px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}

@@ -33,7 +33,10 @@
     <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.rawgit.com/alvarogarciapiz/grip-web/main/styles.css" />
     <link rel="stylesheet" href="/assets/navbar.css">
+     <!-- alertas  -->
 
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -84,12 +87,12 @@
             <span class="bar"></span>
         </button>
         <div class="nav-links">
-            <a href="#home">Añadir</a>
-            <a href="#about">Modificar</a>
-            <a href="#shop">Añadir simulaciones</a>
-            <a href="<?= base_url('logout') ?>" class="logout">Salir</a>
+        <a href="<?= base_url('anadir_prendas') ?>" class="anadir_prendas">Añadir</a>
+        <a href="<?= base_url('modificar_producto') ?>">Modificar</a>
+        <a href="#shop">Añadir simulaciones</a>
+            <a href="#" class="logout" onclick="confirmExit(event)">Salir</a>
         </div>
-        <a href="https://www.gripclothingstore.com" class="arkhip">
+        <a href="<?= base_url(relativePath: 'home_admin') ?>" class="arkhip">
             <h1>GRIP ADMIN</h1>
         </a>
     </div>
@@ -97,6 +100,28 @@
 
 
     </div>
+
+    <script>
+    function confirmExit(event) {
+        event.preventDefault(); // Evita que el enlace se siga inmediatamente
+
+        Swal.fire({
+            title: '¿Seguro que quieres salir?',
+            text: "Si sales, perderás los cambios no guardados.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#000000', // Botón negro
+            cancelButtonColor: '#d33', // Color del botón de cancelar
+            confirmButtonText: 'Sí, salir',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, redirige a la URL de logout
+                window.location.href = '<?= base_url('logout') ?>';
+            }
+        });
+    }
+</script>
     <script>
      document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector("#mobile-menu");
@@ -222,202 +247,85 @@ PARA TENER SÓLO UNA IMAGEN EN VEZ DE CARRUSEL
 </section>
 
 -->
+<?php 
+$disponibles = [];
+$agotados = [];
 
-    <section class="bg-white py-8">
-        <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
-            <nav class="w-full z-30 top-0 px-6 py-1" id="store">
-                <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
-                    <a class="arkhip_sub" id="store">productos</a>
+// Separar productos disponibles y agotados
+foreach ($productos as $producto) {
+    if ($producto['precio_producto'] > 0) {
+        $disponibles[] = $producto; // Producto disponible
+    } else {
+        $agotados[] = $producto; // Producto agotado
+    }
+}
 
-                    <div class="flex items-center" id="store-nav-content">
-                        <!--
-                    <a class='pl-3 inline-block no-underline hover:text-black' href='#'>
-                        <svg class='fill-current hover:text-black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z'/>
-                        </svg>
-                    </a>
+// Combinar los arrays, disponibles primero
+$productos_ordenados = array_merge($disponibles, $agotados);
+?>
 
-                    <a class='pl-3 inline-block no-underline hover:text-black' href='#'>
-                        <svg class='fill-current hover:text-black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z'/>
-                        </svg>
-                    </a>
--->
-                    </div>
+<section class="bg-white py-8">
+    <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+        <nav class="w-full z-30 top-0 px-6 py-1" id="store">
+            <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+                <a class="arkhip_sub" id="store">productos</a>
+                <div class="flex items-center" id="store-nav-content">
+                    <!-- Contenido del navbar -->
                 </div>
-            </nav>
+            </div>
+        </nav>
 
-            <div class='w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col'>
-                <a href='https://www.instagram.com/gripclothinges/?img_index=1'>
-                <img alt="Camiseta GRIP Signature" class="hover:grow hover:shadow-lg" src="assets/signature.webp" />
-                <div class='pt-3 flex items-center justify-between'>
-                        <p class=''>Camiseta Signature</p>
-                        <a href='http://ig.me/m/gripclothinges'>
-                            <svg class='h-10 w-10 fill-current text-gray-500 hover:text-black' viewBox='0 0 24 24'
+        <!-- Cambiar $productos a $productos_ordenados -->
+        <?php foreach ($productos_ordenados as $producto): ?>
+        <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+            <a href="https://www.instagram.com/p/Cn94EwrtGFS/"> <!-- Puedes cambiar el enlace -->
+                <img alt="<?= esc($producto['nombre_producto']); ?>" class="hover:grow hover:shadow-lg"
+                     src="<?= base_url('imagenes_producto/imgs/' . esc($producto['imagen_producto'])); ?>" />
+                     
+                <div class="pt-3 flex items-center justify-between">
+                    <p class=""><?= esc($producto['nombre_producto']); ?></p>
+                    <?php if ($producto['precio_producto'] > 0): ?>
+                        <svg class='h-10 w-10 fill-current text-gray-500 hover:text-black' viewBox='0 0 24 24'
                                 xmlns='http://www.w3.org/2000/svg'>
                                 <path
                                     d='M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z' />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class='pt-1 text-gray-900'>17.99&#8364;</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="Camiseta GRIP More Caffeine" class="hover:grow hover:shadow-lg"
-                        src="assets/caffeine.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Camiseta More Caffeine</p>
-                        <a href="http://ig.me/m/gripclothinges">
-                            <svg class="h-10 w-10 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="pt-1 text-gray-900">19.99&#8364;</p>
-                </a>
-            </div>
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="Gorra GRIP signature blanca" class="hover:grow hover:shadow-lg"
-                        src="assets/gorra-blanca.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Gorra Signature Blanca</p>
-                        <a href="http://ig.me/m/gripclothinges">
-                            <svg class="h-10 w-10 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="pt-1 text-gray-900">13.99&#8364;</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="Gorra GRIP signature negra" class="hover:grow hover:shadow-lg"
-                        src="assets/gorra-negra.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Gorra Signature Negra</p>
-                        <a href="http://ig.me/m/gripclothinges">
-                            <svg class="h-10 w-10 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="pt-1 text-gray-900">13.99&#8364;</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="camiseta GRIP básica negra" class="hover:grow hover:shadow-lg"
-                        src="assets/unum-negra.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Camiseta básica Negra</p>
-                        <a href="http://ig.me/m/gripclothinges">
-                            <svg class="h-10 w-10 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="pt-1 text-gray-900">14.99&#8364;</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="Camiseta básica blanca GRIP " class="hover:grow hover:shadow-lg"
-                        src="assets/unum-blanca.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Camiseta básica Blanca</p>
-                        <a href="http://ig.me/m/gripclothinges">
-                            <svg class="h-10 w-10 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M17.671,13.945l0.003,0.002l1.708-7.687l-0.008-0.002c0.008-0.033,0.021-0.065,0.021-0.102c0-0.236-0.191-0.428-0.427-0.428H5.276L4.67,3.472L4.665,3.473c-0.053-0.175-0.21-0.306-0.403-0.306H1.032c-0.236,0-0.427,0.191-0.427,0.427c0,0.236,0.191,0.428,0.427,0.428h2.902l2.667,9.945l0,0c0.037,0.119,0.125,0.217,0.239,0.268c-0.16,0.26-0.257,0.562-0.257,0.891c0,0.943,0.765,1.707,1.708,1.707S10,16.068,10,15.125c0-0.312-0.09-0.602-0.237-0.855h4.744c-0.146,0.254-0.237,0.543-0.237,0.855c0,0.943,0.766,1.707,1.708,1.707c0.944,0,1.709-0.764,1.709-1.707c0-0.328-0.097-0.631-0.257-0.891C17.55,14.182,17.639,14.074,17.671,13.945 M15.934,6.583h2.502l-0.38,1.709h-2.312L15.934,6.583zM5.505,6.583h2.832l0.189,1.709H5.963L5.505,6.583z M6.65,10.854L6.192,9.146h2.429l0.19,1.708H6.65z M6.879,11.707h2.027l0.189,1.709H7.338L6.879,11.707z M8.292,15.979c-0.472,0-0.854-0.383-0.854-0.854c0-0.473,0.382-0.855,0.854-0.855s0.854,0.383,0.854,0.855C9.146,15.596,8.763,15.979,8.292,15.979 M11.708,13.416H9.955l-0.189-1.709h1.943V13.416z M11.708,10.854H9.67L9.48,9.146h2.228V10.854z M11.708,8.292H9.386l-0.19-1.709h2.512V8.292z M14.315,13.416h-1.753v-1.709h1.942L14.315,13.416zM14.6,10.854h-2.037V9.146h2.227L14.6,10.854z M14.884,8.292h-2.321V6.583h2.512L14.884,8.292z M15.978,15.979c-0.471,0-0.854-0.383-0.854-0.854c0-0.473,0.383-0.855,0.854-0.855c0.473,0,0.854,0.383,0.854,0.855C16.832,15.596,16.45,15.979,15.978,15.979 M16.917,13.416h-1.743l0.189-1.709h1.934L16.917,13.416z M15.458,10.854l0.19-1.708h2.218l-0.38,1.708H15.458z" />
-                            </svg>
-                        </a>
-                    </div>
-                    <p class="pt-1 text-gray-900">14.99&#8364;</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/gripclothinges/?img_index=1">
-                    <img alt="Camiseta rosa anti grip grip club" class="hover:grow hover:shadow-lg"
-                        src="assets/anti-rosa-duo.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Camiseta Anti Grip</p>
+                        </svg>
+                    <?php else: ?>
                         <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
                         </svg>
-                    </div>
-                    <p class="pt-1 text-gray-900">SOLD OUT</p>
-                </a>
-            </div>
+                    <?php endif; ?>
+                </div>
+                
+                <p class="pt-1 text-gray-900">
+                    <?php if ($producto['precio_producto'] > 0): ?>
+                        <?= esc($producto['precio_producto']); ?> Bs
+                        <div class="pt-4 text-center">
+                        <a href="<?= isset($producto['id_producto']) ? base_url('virtual_try_on/' . esc($producto['id_producto'])) : '#'; ?>" 
+                           class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black">
+                           Probar Virtualmente
+                        </a>
+                    </div>  
+                    <?php else: ?>
+                        <span class="text-red-600">SOLD OUT</span>
 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/p/CoXVV3YtoVf/">
-                    <img alt="Sudadera Legendary GRIP " class="hover:grow hover:shadow-lg"
-                        src="assets/legendary-duo.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Sudadera Legendary</p>
-                        <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
-                        </svg>
-                    </div>
-                    <p class="pt-1 text-gray-900">SOLD OUT</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/p/CmE6kbxt5sH/">
-                    <img alt="Camiseta GRIP Stay Natty" class="hover:grow hover:shadow-lg"
-                        src="assets/trembo-duo.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Camiseta Stat Natty</p>
-                        <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
-                        </svg>
-                    </div>
-                    <p class="pt-1 text-gray-900">SOLD OUT</p>
-                </a>
-            </div>
-
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="https://www.instagram.com/p/Cn94EwrtGFS/">
-                    <img alt="Sudadera Anti Grip Grip Club" class="hover:grow hover:shadow-lg"
-                        src="assets/anti-grip-azul-unum.webp" />
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="">Sudadera anti grip</p>
-                        <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
-                        </svg>
-                    </div>
-                    <p class="pt-1 text-gray-900">SOLD OUT</p>
-                </a>
-            </div>
+                        <div class="pt-4 text-center">
+                        <a 
+                        class="bg-white hover:bg-gray-300 text-black font-bold py-5 px-7 rounded-md text-sm">
+                           
+                        </a>
+                    </div>  
+                    <?php endif; ?>
+                </p>
+            </a>
         </div>
-    </section>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+
 
     <!--
 <section class="bg-white py-8">

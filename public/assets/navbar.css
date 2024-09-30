@@ -119,6 +119,8 @@
         text-align: right; /* Alinea el texto a la derecha dentro del contenedor */
         width: auto; /* Ajusta el ancho del título automáticamente */
            }
+
+           
 }
 .top-div1 {
     position: fixed;
@@ -211,3 +213,95 @@
         transform: translateX(-100%);
     }
 }
+body {
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 40px;
+
+}
+
+form input, form button {
+    font-size: 16px;
+}
+
+
+form button {
+    background-color: #333;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+.product-img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 250px; /* Añade espacio a la izquierda de la imagen si es necesario */
+}
+
+@font-face {
+    font-family: 'Arkhip';
+    src: url('fonts/Arkhip-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: 'Arkhip', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 0.1ch;
+    color: #000;
+    text-align: center;
+    margin: 20px 0;
+}
+.anadir_prendas {
+    color: #000; /* Color del texto por defecto */
+    text-decoration: none;
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.anadir_prendas:hover {
+    color: #555;
+}
+
+/* Clase activa con efecto de brillo */
+.anadir_prendas.active {
+    color: #000; /* Color del texto cuando está activo */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+    border-radius: 5px;
+    transition: box-shadow 0.6s ease-in-out;
+}
+@media (max-width: 768px) {
+    form {
+        display: flex;
+        flex-direction: column; /* Alinea los elementos en columna */
+        align-items: center; /* Centra los elementos horizontalmente */
+        margin-top: 2px; /* Añade margen superior al formulario */
+        width: 200%; /* Establece el ancho del formulario a un 90% del contenedor */
+        max-width: 400px; /* Establece un ancho máximo si es necesario */
+    }
+
+    .product-img {
+        display: none; /* Oculta la imagen completamente */
+    }
+    
+
+    /* Ajustes adicionales para otros elementos del formulario */
+    form input, form button {
+        width: 100%; /* Asegúrate de que los campos ocupen todo el ancho */
+        max-width: 300px; /* Establece un ancho máximo para los campos */
+    }
+
+    form button {
+        margin-top: 10px; /* Añade margen superior al botón */
+    }
+}
+
