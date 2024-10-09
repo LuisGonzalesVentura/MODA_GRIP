@@ -1,0 +1,62 @@
+CRITICAL - 2024-10-09 19:59:34 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "simulacion.css')"
+[Method: GET, Route: simulacion/assets/simulacion.css%27%29]
+in SYSTEMPATH\Router\Router.php on line 737.
+ 1 SYSTEMPATH\Router\Router.php(204): CodeIgniter\Router\Router->checkDisallowedChars('simulacion/assets/simulacion.css\')')
+ 2 SYSTEMPATH\CodeIgniter.php(834): CodeIgniter\Router\Router->handle('simulacion/assets/simulacion.css\')')
+ 3 SYSTEMPATH\CodeIgniter.php(457): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-09 20:02:09 --> ErrorException: Undefined variable $productos
+[Method: GET, Route: simulacion/45]
+in APPPATH\Views\simulacion_de_prendas.php on line 201.
+ 1 APPPATH\Views\simulacion_de_prendas.php(201): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $productos', 'C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php', 201)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('simulacion_de_prendas', [], true)
+ 5 APPPATH\Controllers\Home.php(34): view('simulacion_de_prendas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->view_simulacion('45')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-10-09 20:05:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:05:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:05:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:05:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:05:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:05:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:06:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:06:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:06:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-09 20:06:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-09 20:13:41 --> ErrorException: Undefined variable $productos
+[Method: GET, Route: simulacion/41]
+in APPPATH\Views\simulacion_de_prendas.php on line 225.
+ 1 APPPATH\Views\simulacion_de_prendas.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $productos', 'C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php', 225)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('simulacion_de_prendas', [], true)
+ 5 APPPATH\Controllers\Home.php(34): view('simulacion_de_prendas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->view_simulacion('41')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-10-09 20:13:43 --> ErrorException: Undefined variable $productos
+[Method: GET, Route: simulacion/41]
+in APPPATH\Views\simulacion_de_prendas.php on line 225.
+ 1 APPPATH\Views\simulacion_de_prendas.php(225): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $productos', 'C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php', 225)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xamppp\\htdocs\\MODA_GRIPP\\app\\Views\\simulacion_de_prendas.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('simulacion_de_prendas', [], true)
+ 5 APPPATH\Controllers\Home.php(34): view('simulacion_de_prendas', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->view_simulacion('41')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

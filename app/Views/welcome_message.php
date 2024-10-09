@@ -87,19 +87,16 @@
         <div class="navigation-bar">
             <a href="https://www.gripclothingstore.com" class="arkhip">
                 <h1>grip</h1>
-                <!--<img alt="GRIP Clothing" class="logo-nav" src="https://i.ibb.co/w4rxbCr/grip.webp" />-->
-
-                
+                <!--<img alt="GRIP Clothing" class="logo-nav" src="https://i.ibb.co/w4rxbCr/grip.webp" />-->               
             </a>
              <!-- Ícono de inicio de sesión a la derecha -->
 
-
-
+ 
              <a class="mx-2 user-icon d-none d-md-block"href="<?= base_url(relativePath: 'home_admin') ?>">
-    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" style="color: black;">
-        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-10 1.67-10 5v2h20v-2c0-3.33-6.69-5-10-5z"/>
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" style="color: black;">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.31 0-10 1.67-10 5v2h20v-2c0-3.33-6.69-5-10-5z"/>
     </svg>
-</a>
+             </a>
 
 
 
@@ -108,7 +105,6 @@
         </div>
             
     </div>
-
     <div class="carousel relative container mx-auto" style="max-width: 1600px; margin-top: 100px">
         <div class="carousel-inner relative overflow-hidden w-full">
             <!--Slide 1-->
@@ -238,6 +234,12 @@ foreach ($productos as $producto) {
 $productos_ordenados = array_merge($disponibles, $agotados);
 ?>
 
+
+
+
+
+
+
 <section class="bg-white py-8">
     <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
         <nav class="w-full z-30 top-0 px-6 py-1" id="store">
@@ -277,10 +279,14 @@ $productos_ordenados = array_merge($disponibles, $agotados);
                     <?php if ($producto['precio_producto'] > 0): ?>
                         <?= esc($producto['precio_producto']); ?> Bs
                         <div class="pt-4 text-center">
-                        <a href="<?= isset($producto['id_producto']) ? base_url('virtual_try_on/' . esc($producto['id_producto'])) : '#'; ?>" 
-                           class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black">
-                           Probar Virtualmente
-                        </a>
+                        <a href="<?= base_url('simulacion/' . esc($producto['id_productos'])); ?>" 
+       class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black">
+       Probar Virtualmente
+    </a>
+
+
+
+
                     </div>  
                     <?php else: ?>
                         <span class="text-red-600">SOLD OUT</span>

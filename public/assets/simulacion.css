@@ -1,0 +1,88 @@
+.container1 {
+    width: 45%; /* Ancho de cada contenedor */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: white; /* Fondo blanco */
+    float: left; /* Alinear a la izquierda */
+    margin-bottom: 20px; /* Añadir margen inferior para evitar superposición */
+    margin-left: 5%; /* Mueve el contenedor un poco a la derecha */
+}
+
+.container2 {
+    width: 45%; /* Ancho de cada contenedor */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    background-color: white; /* Fondo blanco */
+    float: right; /* Alinear a la derecha */
+    margin-bottom: 20px; /* Añadir margen inferior */
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.camera {
+    margin-top: 50px; /* Separar la cámara del contenido superior */
+    text-align: center; /* Centrar la cámara */
+}
+
+.camera img {
+    width: 80%; /* Ajusta la imagen de la cámara a un 80% del ancho */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+
+.no-camera {
+    width: 100%; /* Imagen de cámara apagada ocupará todo el ancho */
+    height: auto; /* Mantener la proporción de la imagen */
+    display: block; /* Mostrar la imagen de cámara apagada */
+}
+
+.shirt-section {
+    text-align: center; /* Centrar el contenido de la sección de la camisa */
+}
+
+.shirt-image {
+    width: 50%; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Se asegura de que la imagen sea un bloque */
+    margin: 50px auto 0; /* Centra la imagen horizontalmente y empuja hacia abajo con un margin-top */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+}
+
+.sizes {
+    margin: 30px 0; /* Ajustar el espaciado superior e inferior */
+    text-align: center; /* Alinear los botones de tallas en el centro */
+}
+
+.sizes button {
+    width: 50px; /* Ancho específico para los botones de tallas */
+    margin: 0 10px; /* Margen lateral entre los botones */
+    display: inline-block; /* Alinear los botones en línea */
+}
+
+button {
+    width: auto; /* Ancho del botón auto */
+    background-color: black; /* Color de fondo negro */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno más cómodo */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor a puntero */
+    font-size: 12px; /* Tamaño de letra del botón ajustado */
+    margin: 15px auto; /* Centrar el botón y agregar margen superior */
+    display: block; /* Asegurar que el botón se comporte como bloque para el centrado */
+}
+
+button:hover {
+    background-color: #444; /* Color al pasar el mouse */
+}
+.footer-border {
+    border-top: 2px solid #4A5568; /* Ajustar grosor y color del borde */
+    padding-top: 16px;
+    margin-top: 32px;
+}
+

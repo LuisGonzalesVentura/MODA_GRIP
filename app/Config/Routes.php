@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index'); // Ruta para la página principal
+$routes->get('/simulacion/(:num)', 'Home::view_simulacion/$1');
 
 // Rutas para el login
 $routes->get('login', 'Login::index'); // Mostrar formulario de login
@@ -20,3 +21,5 @@ $routes->post('/guardar_producto', 'Home_admin::guardar_producto');
 $routes->get('modificar_producto', 'Home_admin::view_modificar_producto');
 $routes->get('obtener_producto/(:num)', 'Home_admin::obtener_producto/$1');
 $routes->post('/modificar_producto', 'Home_admin::modificar_producto');
+// Nueva ruta para la simulación de prendas
+// Ruta para la simulación de prendas, con el ID del producto
