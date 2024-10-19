@@ -26,14 +26,16 @@
 .camera {
     margin-top: 50px; /* Separar la cámara del contenido superior */
     text-align: center; /* Centrar la cámara */
+    position: relative; /* Hacer que el contenedor de la cámara sea relativo */
 }
 
 .camera img {
-    width: 80%; /* Ajusta la imagen de la cámara a un 80% del ancho */
+    width: 640px; /* Ajusta la imagen de la cámara a un 80% del ancho */
     height: auto; /* Mantiene la proporción de la imagen */
     margin: 0 auto; /* Centra la imagen horizontalmente */
-}
+    z-index: 1; /* Asegúrate de que esté por encima del canvas */
 
+}
 
 .no-camera {
     width: 100%; /* Imagen de cámara apagada ocupará todo el ancho */
@@ -80,6 +82,7 @@ button {
 button:hover {
     background-color: #444; /* Color al pasar el mouse */
 }
+
 .footer-border {
     border-top: 2px solid #4A5568; /* Ajustar grosor y color del borde */
     padding-top: 16px;
