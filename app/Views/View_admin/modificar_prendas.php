@@ -96,7 +96,9 @@
         <div class="nav-links">
         <a href="<?= base_url('anadir_prendas') ?>" class="anadir_prendas">Añadir</a>
         <a href="<?= base_url('modificar_producto') ?>">Modificar</a>
-            <a href="#shop">Añadir simulaciones</a>
+        <a href="<?= base_url('admin/anadir-simulaciones') ?>">Añadir simulaciones</a> <!-- Enlace corregido -->
+        <a href="<?= base_url('admin/modificar-simulacion') ?>">Modificar simulación</a>
+
             <a href="#" class="logout" onclick="confirmExit(event)">Salir</a>
             </div>
             <a href="<?= base_url(relativePath: 'home_admin') ?>" class="arkhip">
@@ -169,7 +171,13 @@
 
     <div>
         <button type="submit" class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800">Guardar Cambios</button>
+        <!-- Botón de eliminar producto -->
+       
     </div>
+    <div>
+    <button type="button" onclick="confirmDelete()" class="w-full bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-500">Eliminar Producto</button>
+</div>
+
 </form>
 
 
@@ -183,13 +191,14 @@
     </div>
 </body>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const selectProducto = document.getElementById('producto_select');
     const nombreProducto = document.getElementById('nombre_producto');
     const precioProducto = document.getElementById('precio_producto');
     const imagenProducto = document.getElementById('productPreview');
-    const hiddenInput = document.getElementById('producto_select_hidden'); // Campo oculto
+    const hiddenInput = document.getElementById('producto_select_hidden');
 
     selectProducto.addEventListener('change', function() {
         const productId = selectProducto.value;
@@ -197,11 +206,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (productId) {
             fetch(`<?= base_url('obtener_producto') ?>/${productId}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(data => {
-                    nombreProducto.value = data.nombre_producto;
-                    precioProducto.value = data.precio_producto;
-                    imagenProducto.src = `<?= base_url('imagenes_producto/imgs') ?>/${data.imagen_producto}`;
+                    if (data) {
+                        nombreProducto.value = data.nombre_producto;
+                        precioProducto.value = data.precio_producto;
+                        imagenProducto.src = `<?= base_url('imagenes_producto/imgs') ?>/${data.imagen_producto}`;
+                    } else {
+                        // Limpiar campos si no se encuentra el producto
+                        nombreProducto.value = '';
+                        precioProducto.value = '';
+                        imagenProducto.src = 'https://static.vecteezy.com/system/resources/previews/016/017/372/non_2x/image-upload-free-png.png';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching product:', error);
                 });
         } else {
             // Limpiar los campos si no hay producto seleccionado
@@ -214,6 +238,71 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function confirmDelete() {
+    const productoId = document.getElementById('producto_select').value;
+    
+    // Verificar si se ha seleccionado un producto
+    if (productoId) {
+        // Mostrar la alerta de SweetAlert2
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Cambiar color de botón de confirmación a rojo
+            cancelButtonColor: '#000', // Cambiar color del botón de cancelar a negro
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'No, cancelar',
+            customClass: {
+                confirmButton: 'btn-confirm', // Clase CSS personalizada para el botón de confirmación
+                cancelButton: 'btn-cancel' // Clase CSS personalizada para el botón de cancelar
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, crear y enviar el formulario
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '<?= base_url('eliminar_producto') ?>'; // Asegúrate de que esta ruta sea correcta
+                
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'producto_select';
+                hiddenInput.value = productoId;
+                
+                form.appendChild(hiddenInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: 'Por favor, selecciona un producto antes de intentar eliminar.',
+            confirmButtonText: 'OK', // Texto del botón OK
+            confirmButtonColor: '#000', // Color del botón OK en rojo
+            customClass: {
+                confirmButton: 'btn-error' // Clase CSS personalizada para el botón de error
+            }
+        });
+    }
+}
+</script>
+
+<style>
+/* Estilos personalizados para los botones de SweetAlert2 */
+.btn-confirm {
+    background-color: #d33 !important; /* Color rojo para el botón de confirmación */
+    color: #fff !important; /* Color del texto en blanco */
+}
+
+.btn-cancel {
+    background-color: #000 !important; /* Color negro para el botón de cancelar */
+    color: #fff !important; /* Color del texto en blanco */
+}
+</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

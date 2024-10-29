@@ -96,7 +96,9 @@
         <div class="nav-links">
         <a href="<?= base_url('anadir_prendas') ?>" class="anadir_prendas">Añadir</a>
         <a href="<?= base_url('modificar_producto') ?>">Modificar</a>
-            <a href="#shop">Añadir simulaciones</a>
+        <a href="<?= base_url('admin/anadir-simulaciones') ?>">Añadir simulaciones</a> <!-- Enlace corregido -->
+        <a href="<?= base_url('admin/modificar-simulacion') ?>">Modificar simulación</a>
+
             <a href="#" class="logout" onclick="confirmExit(event)">Salir</a>
             </div>
             <a href="<?= base_url(relativePath: 'home_admin') ?>" class="arkhip">

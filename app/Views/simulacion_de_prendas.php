@@ -44,6 +44,32 @@
     <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.rawgit.com/alvarogarciapiz/grip-web/main/styles.css" />
     <style>
+    #toggleCamera {
+    pointer-events: auto; /* Asegura que el botón sea clickeable */
+    position: relative; /* Necesario para el z-index */
+    z-index: 50; /* Asegúrate de que sea mayor que cualquier otro elemento */
+}
+
+#modeloContenedor {
+    position: absolute; /* Permite mover el contenedor con top y left */
+    top: 127px;         /* Ajustar la posición vertical (más abajo) */
+    left: 1010px;       /* Ajustar la posición horizontal (más a la derecha) */
+    width: 322px;       /* Ancho del contenedor */
+    height: 322px;      /* Alto del contenedor */
+    overflow: hidden;   /* Oculta cualquier contenido que sobresalga */
+    background-color: transparent; /* Fondo completamente transparente */
+    border: none;       /* Eliminar borde */
+    border-radius: 15px; /* Bordes redondeados */
+    z-index: 10;        /* Asegura que el contenedor esté encima de otros elementos */
+}
+
+
+
+#buttonContainer {
+    position: relative; /* Permite el uso de z-index */
+    z-index: 50; /* Asegúrate de que esté por encima de otros elementos */
+}
+
  #canvas {
     position: absolute;
     top: 0;
@@ -59,6 +85,9 @@
     top: 0; /* Desde el inicio */
     left: 0; /* Desde el inicio */
     z-index: 10; /* Asegúrate de que esté por encima de todo */
+
+
+    
 }
 
 .container1, .container2 {
@@ -121,10 +150,11 @@
 }
 
 #video {
-            display: none;
-            border-radius: 8px; /* Bordes redondeados */
+    display: none; /* Se oculta por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    z-index: 1; /* Asegúrate de que el video tenga un z-index menor que el botón */
+}
 
-        }
 
 /* Estilo para el canvas o contenedor del modelo 3D */
 #canvas3D {
@@ -183,38 +213,45 @@
     <!-- Código cámara -->
     <section class="bg-white py-8">
     <div class="container1">
-        <div class="camera-section">
-            <div class="camera">
-                <video id="video" autoplay playsinline style="display: none;"></video>
-                <canvas id="canvas" style="position: absolute; top: 0; left: 0; z-index: 10;"></canvas>
-                <img id="noCameraFeed" src="https://support.wepow.com/hc/article_attachments/25998203727639" alt="Cámara apagada" class="no-camera" style="z-index: 0;">
-            </div>
-            <div class="flex justify-center space-x-4 w-full">
-            <button type="button" 
-                        class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
-                        id="toggleCamera" 
-                        style="margin-top: 20px;">
-                    ENCENDER CÁMARA
-                </button>
+    <div class="camera-section">
+        <div class="camera">
+            <video id="video" autoplay playsinline style="display: none;"></video>
+            <canvas id="canvas" style="position: absolute; top: 0; left: 0;"></canvas>
+            <img id="noCameraFeed" src="https://support.wepow.com/hc/article_attachments/25998203727639" alt="Cámara apagada" class="no-camera">
         </div>
+        <div id="buttonContainer" class="flex justify-center space-x-4 w-full">
+            <button type="button" 
+                    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
+                    id="toggleCamera" 
+                    style="margin-top: 20px;">
+                ENCENDER CÁMARA
+            </button>
         </div>
     </div>
-        
-        <div class="container2">
-            <div class="shirt-section">
-                <img src="<?= base_url('imagenes_producto/imgs/' . esc($producto['imagen_producto'])); ?>" alt="<?= esc($producto['nombre_producto']); ?>" class="shirt-image">
-                
-               
-                
-                <div>
+</div>
+
+
+
+<div class="container2">
+        <div class="shirt-section">
+            <img src="<?= base_url('imagenes_producto/imgs/' . esc($producto['imagen_producto'])); ?>" 
+                 alt="<?= esc($producto['nombre_producto']); ?>" 
+                 class="shirt-image">
+
+            <div>
                 <button type="button" 
-    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
-    id="starCamera" 
-    style="margin-top: 20px;">  <!-- Ajusta el valor según sea necesario -->
-    VER EN 3D
-</button>                </div>
+                        class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
+                        id="verModeloBtn" 
+                        style="margin-top: 20px;">
+                    VER EN 3D
+                </button>
             </div>
         </div>
+    </div>
+
+
+    <div id="modeloContenedor"></div> <!-- Contenedor para el modelo 3D -->
+
     </section>
     <!-- Fin código cámara -->
 
@@ -228,20 +265,18 @@
     const noCameraFeed = document.getElementById('noCameraFeed');
     let net;
     let cameraActive = false;
-// Variables para suavizar la posición de los puntos
-const previousPositions = {};
-    // Variables de Three.js
+    const previousPositions = {};
     let scene, camera, renderer, model;
-// Función para suavizar las posiciones de los puntos
-function smoothPosition(keypointIndex, x, y) {
-    if (!previousPositions[keypointIndex]) {
-        previousPositions[keypointIndex] = { x: x, y: y };
-    } else {
-        previousPositions[keypointIndex].x = (previousPositions[keypointIndex].x + x) / 2;
-        previousPositions[keypointIndex].y = (previousPositions[keypointIndex].y + y) / 2;
+
+    function smoothPosition(keypointIndex, x, y) {
+        if (!previousPositions[keypointIndex]) {
+            previousPositions[keypointIndex] = { x: x, y: y };
+        } else {
+            previousPositions[keypointIndex].x = (previousPositions[keypointIndex].x + x) / 2;
+            previousPositions[keypointIndex].y = (previousPositions[keypointIndex].y + y) / 2;
+        }
+        return previousPositions[keypointIndex];
     }
-    return previousPositions[keypointIndex];
-}
 
     async function setupCamera() {
         video.width = 640;
@@ -268,128 +303,99 @@ function smoothPosition(keypointIndex, x, y) {
 
     async function initThreeJS() {
         scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        
+        camera = new THREE.PerspectiveCamera(75, 640 / 570, 0.1, 1000);
         renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(640, 570); // Establecer el tamaño del renderer
+
         document.body.appendChild(renderer.domElement);
+        camera.position.set(0, 1, 3);
 
-        // Ajustar la posición de la cámara
-        camera.position.set(0, 1, 3); // Aleja la cámara más en Z si es necesario
-
-        // Añadir luces
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Luz ambiental
+        // ** Luces **
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Luz ambiental suave
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional
-        directionalLight.position.set(1, 1, 1).normalize();
-        scene.add(directionalLight);
+        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional
+        directionalLight1.position.set(1, 1, 1).normalize();
+        scene.add(directionalLight1);
 
-        // Cargar modelo de la camiseta
+        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.7); // Otra fuente de luz direccional
+        directionalLight2.position.set(-1, 1, -1).normalize();
+        scene.add(directionalLight2);
+
         const loader = new THREE.GLTFLoader();
         loader.load('/assets/oversize.glb', function(gltf) {
-    model = gltf.scene;
-    model.scale.set(50, 50, 50); // Ajusta la escala del modelo según sea necesario
-
-    // Ajustar la rotación del modelo para que esté de frente
-    model.rotation.y = Math.PI; // 180 grados en radianes
-
-    scene.add(model);
-    console.log("Modelo cargado y agregado a la escena");
-}, undefined, function(error) {
-    console.error("Error al cargar el modelo:", error);
-});
-
+            model = gltf.scene;
+            model.scale.set(5, 5, 5); // Reducido para que se ajuste mejor a la vista de la cámara
+            model.rotation.y = Math.PI;
+            scene.add(model);
+            console.log("Modelo cargado y agregado a la escena");
+        }, undefined, function(error) {
+            console.error("Error al cargar el modelo:", error);
+        });
     }
 
-    function drawPoseAndClothes(pose) {
+
+  // Variable global para el factor de ajuste de rotación
+let rotationAdjustment = 0.3; // Ajuste inicial
+
+// Función para actualizar el ajuste de rotación
+function updateRotationAdjustment(value) {
+    rotationAdjustment = value; // Actualiza el valor del ajuste
+}
+function drawPoseAndClothes(pose) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const keypointsToDraw = [
-        // Puntos clave
-        0,  // Nariz
-        1,  // Ojo izquierdo
-        2,  // Ojo derecho
-        3,  // Oreja izquierda
-        4,  // Oreja derecha
-        5,  // Hombro derecho
-        6,  // Codo derecho
-        7,  // Muñeca derecha
-        11, // Hombro izquierdo
-        12, // Codo izquierdo
-        13, // Muñeca izquierda
-        8,  // Cadera derecha
-        9,  // Rodilla derecha
-        10, // Tobillo derecho
-        14, // Cadera izquierda
-        15, // Rodilla izquierda
-        16  // Tobillo izquierdo
-    ];
-
+    const keypointsToDraw = [0, 1, 2, 3, 4, 5, 6, 7, 11, 12, 13]; // Excluyendo las piernas
     const confidenceThreshold = 0.5;
 
-    // Dibuja los puntos clave
     keypointsToDraw.forEach(index => {
         const keypoint = pose.keypoints[index];
         if (keypoint && keypoint.score > confidenceThreshold) {
             let { y, x } = keypoint.position;
-
-            // Suavizar la posición del punto
             const smoothed = smoothPosition(index, x, y);
             ctx.beginPath();
             ctx.arc(smoothed.x, smoothed.y, 7, 0, 2 * Math.PI);
-            ctx.fillStyle = 'gray'; // Color plomo
+            ctx.fillStyle = 'gray';
             ctx.fill();
         }
     });
 
-    // Obtener los puntos clave de los hombros y caderas
     const rightShoulder = pose.keypoints[5];
     const leftShoulder = pose.keypoints[11];
-    const rightHip = pose.keypoints[8];
-    const leftHip = pose.keypoints[14];
 
-    // Verifica si ambos hombros y ambas caderas tienen una puntuación de confianza suficiente
-    if (rightShoulder.score > confidenceThreshold && leftShoulder.score > confidenceThreshold &&
-        rightHip.score > confidenceThreshold && leftHip.score > confidenceThreshold) {
-
-        // Calcular el centro de los hombros y caderas
+    if (rightShoulder.score > confidenceThreshold && leftShoulder.score > confidenceThreshold) {
         const centerShouldersX = (rightShoulder.position.x + leftShoulder.position.x) / 2;
         const centerShouldersY = (rightShoulder.position.y + leftShoulder.position.y) / 2;
-        const centerHipsX = (rightHip.position.x + leftHip.position.x) / 2;
-        const centerHipsY = (rightHip.position.y + leftHip.position.y) / 2;
 
-        // Calcular la distancia entre los hombros y las caderas para escalar el modelo
-        const shoulderWidth = Math.abs(rightShoulder.position.x - leftShoulder.position.x);
-        const bodyHeight = Math.abs(centerShouldersY - centerHipsY);
+        const bodyHeight = Math.abs(centerShouldersY); // Altura del cuerpo
+        const scaleFactor = Math.max(0.5, 650 / bodyHeight); // Establecer un valor mínimo para el tamaño
 
-        // Escalar el modelo basado en la distancia del cuerpo
-        const scaleFactor = bodyHeight / 60;  // Ajusta este valor según sea necesario
         if (model) {
-            model.scale.set(scaleFactor, scaleFactor, scaleFactor); // Ajustar la escala según el tamaño del cuerpo
+            model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+            
+            const offsetX = -0.3; 
+            const offsetY = -1.8; // Aumentar este valor para mover el modelo hacia arriba
+            const offsetZ = 0;
 
-            const offsetX = -3.8; // Aumenta este valor para mover el modelo más a la derecha
-const offsetY = -1.1; // Ajusta este valor para mover el modelo más arriba (mantén o modifica según necesidad)
-const offsetZ = -0.5; // Asegúrate de que el modelo esté delante de la cámara
+            model.position.set(centerShouldersX / 300 + offsetX, -(centerShouldersY / 300) + offsetY, offsetZ);
 
-            // Ajustar la posición del modelo con relación a la cámara
-            model.position.set(centerShouldersX / 300 + offsetX, -(centerShouldersY / 300) + offsetY, offsetZ); 
+            // Establecer la rotación a 0 para que el modelo siempre esté de frente
+            model.rotation.y = 0;
 
-            model.visible = true; // Asegúrate de que el modelo sea visible
-            model.renderOrder = 1; // Asegura que el modelo se renderice por encima de otros elementos
+            model.visible = true;
+            model.renderOrder = 1;
         }
     } else {
         if (model) {
-            model.visible = false; // Oculta el modelo si no se detecta pose
+            model.visible = false;
         }
     }
 }
 
 
-
     function animate() {
+        
         requestAnimationFrame(animate);
-        renderer.render(scene, camera); // Renderizar la escena
+        renderer.render(scene, camera);
     }
 
     async function main() {
@@ -397,16 +403,27 @@ const offsetZ = -0.5; // Asegúrate de que el modelo esté delante de la cámara
     video.play();
     await loadPosenet();
     initThreeJS();
+
+    // Asegúrate de que el botón se mantenga visible y activo
+    const buttonContainer = document.getElementById('buttonContainer');
+    buttonContainer.style.position = 'relative';
+    buttonContainer.style.zIndex = '50'; // Coloca el botón por encima de la animación
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     detectPose();
     animate();
 }
 
-document.getElementById('toggleCamera').addEventListener('click', async () => {
+    let animationId;
+
+    document.getElementById('toggleCamera').addEventListener('click', async () => {
+    const button = document.getElementById('toggleCamera');
+    
+    console.log("Botón clickeado. Estado de cámara:", cameraActive ? "Activada" : "Desactivada");
+
     if (!cameraActive) {
         cameraActive = true;
-        const button = document.getElementById('toggleCamera');
         button.classList.remove('bg-black', 'hover:bg-gray-800');
         button.classList.add('bg-red-600', 'hover:bg-red-500');
         button.textContent = 'APAGAR CÁMARA'; 
@@ -414,34 +431,95 @@ document.getElementById('toggleCamera').addEventListener('click', async () => {
         video.style.display = 'block';
         noCameraFeed.style.display = 'none';
 
+        // Inicia cámara y simulación
         await main();
-        
+
         renderer.domElement.style.position = 'absolute';
         renderer.domElement.style.top = '0';
         renderer.domElement.style.left = '0';
         renderer.domElement.style.zIndex = '2';
-        
-        video.style.zIndex = '1';
+
+        console.log("Cámara y simulación activadas.");
+
     } else {
+        // Apagar cámara y simulación
         cameraActive = false;
-        const button = document.getElementById('toggleCamera');
         button.classList.remove('bg-red-600', 'hover:bg-red-500');
         button.classList.add('bg-black', 'hover:bg-gray-800');
         button.textContent = 'ENCENDER CÁMARA';
 
-        video.style.display = 'none';
-        noCameraFeed.style.display = 'block';
-        
-        // Detener la cámara y liberar recursos aquí si es necesario.
-        // Si usas navigator.mediaDevices.getUserMedia, recuerda detener el stream.
         const stream = video.srcObject;
         if (stream) {
             const tracks = stream.getTracks();
             tracks.forEach(track => track.stop());
+            console.log("Cámara detenida.");
         }
-        video.srcObject = null; // Liberar el video
+        video.srcObject = null;
+
+        video.style.display = 'none';
+        noCameraFeed.style.display = 'block';
+
+        // Desactiva y limpia el renderer
+        if (renderer) {
+            renderer.forceContextLoss();
+            renderer.dispose();
+            renderer = null;
+            console.log("Renderer desactivado.");
+        }
+
+        // Detiene la animación si es necesario
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+            console.log("Animación detenida.");
+        }
     }
 });
+
+function stopMain() {
+    console.log("Deteniendo animación y liberando recursos de WebGL"); // Verifica que entra a stopMain
+    // Detener la animación de Three.js si está activa
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+        console.log("Animación detenida"); // Confirmar que la animación se detuvo
+    }
+
+    // Detener el renderer y limpiar los recursos de WebGL
+    if (renderer) {
+        renderer.domElement.remove(); // Eliminar el elemento del DOM
+        renderer.dispose(); // Liberar el contexto WebGL
+        renderer = null;
+        console.log("Renderer de Three.js liberado"); // Confirmar que el renderer fue liberado
+    }
+
+    // Eliminar el modelo y limpiar la escena
+    if (scene && model) {
+        scene.remove(model);
+        model = null;
+        console.log("Modelo eliminado de la escena"); // Confirmar que el modelo se eliminó de la escena
+    }
+}
+
+function stopCamera() {
+    console.log("Apagando la cámara"); // Verifica que entra a stopCamera
+    // Detener el flujo de video
+    const stream = video.srcObject;
+    if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        console.log("Stream de cámara detenido"); // Confirmar que las pistas de la cámara se detuvieron
+    }
+    video.srcObject = null;
+    console.log("Cámara apagada correctamente"); // Confirmar que el video fue desactivado
+}
+
+function animate() {
+    // Guardar el ID de animación
+    animationId = requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+    console.log("Animación ejecutándose"); // Confirmar que la animación está en ejecución
+}
 
 
 </script>
@@ -451,10 +529,91 @@ document.getElementById('toggleCamera').addEventListener('click', async () => {
 
 
 
+<!-- Asegúrate de incluir OrbitControls antes de tu script principal -->
+<script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/controls/OrbitControls.js"></script>
 
+<script>
+    // Variables globales
+    let escena3D, camara3D, renderizador3D, modelo3D, controles;
 
+    function inicializarEscena() {
+        escena3D = new THREE.Scene();
+        camara3D = new THREE.PerspectiveCamera(75, 330 / 330, 0.1, 1000);
+        // Establecer alpha: true para la transparencia
+        renderizador3D = new THREE.WebGLRenderer({ alpha: true });
+        renderizador3D.setSize(325, 325);
+        document.getElementById('modeloContenedor').appendChild(renderizador3D.domElement);
 
+        // Configurar cámara
+        camara3D.position.set(0, 1, 5);
 
+        // Agregar controles
+        controles = new THREE.OrbitControls(camara3D, renderizador3D.domElement);
+        controles.enableDamping = true; // Suaviza el movimiento
+        controles.dampingFactor = 0.25; // Factor de amortiguamiento
+        controles.screenSpacePanning = false; // Evitar que la cámara se desplace en el espacio de la pantalla
+        controles.maxPolarAngle = Math.PI / 2; // Limitar el movimiento vertical de la cámara
+
+        // Agregar luces para mejorar la iluminación
+        const luzAmbiente = new THREE.AmbientLight(0xffffff, 0.5); // Luz ambiental suave
+        escena3D.add(luzAmbiente);
+        
+        const luzDireccional1 = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional
+        luzDireccional1.position.set(1, 1, 1).normalize();
+        escena3D.add(luzDireccional1);
+        
+        const luzDireccional2 = new THREE.DirectionalLight(0xffffff, 0.7); // Otra fuente de luz direccional
+        luzDireccional2.position.set(-1, 1, -1).normalize();
+        escena3D.add(luzDireccional2);
+
+        // Para hacer la escena transparente, puedes eliminar el color de fondo
+        // o establecerlo a null
+        escena3D.background = null; // Esto hará que el fondo sea transparente
+    }
+
+    function cargarModelo3D() {
+        const cargadorGLTF = new THREE.GLTFLoader();
+        cargadorGLTF.load('/assets/oversized_t-shirt (1).glb', function(gltf) {
+            modelo3D = gltf.scene;
+            modelo3D.scale.set(8, 8, 8);
+            modelo3D.position.set(0, -10.1, 0);
+            escena3D.add(modelo3D);
+            animarModelo();
+        }, undefined, function(error) {
+            console.error("Error al cargar el modelo:", error);
+        });
+    }
+
+    function animarModelo() {
+        requestAnimationFrame(animarModelo);
+        if (modelo3D) {
+            modelo3D.rotation.y += 0.01; // Rotación opcional
+        }
+        
+        // Actualizar controles
+        if (controles) {
+            controles.update();
+        }
+
+        renderizador3D.render(escena3D, camara3D);
+    }
+
+    document.getElementById('verModeloBtn').addEventListener('click', function() {
+        const modeloContenedor = document.getElementById('modeloContenedor');
+        modeloContenedor.style.display = 'block'; // Mostrar el contenedor del modelo
+        inicializarEscena(); // Inicializar la escena
+        cargarModelo3D(); // Cargar el modelo
+    });
+
+    // Ajustar la escena al redimensionar la ventana
+    window.addEventListener('resize', function() {
+        if (camara3D) {
+            camara3D.aspect = 330 / 330;
+            camara3D.updateProjectionMatrix();
+            renderizador3D.setSize(330, 330);
+        }
+    });
+</script>
 
 
 

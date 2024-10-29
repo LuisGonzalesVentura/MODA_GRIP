@@ -88,12 +88,14 @@
         </button>
         <div class="nav-links">
         <a href="<?= base_url('anadir_prendas') ?>" class="anadir_prendas">Añadir</a>
-        <a href="<?= base_url('modificar_producto') ?>">Modificar</a>
-        <a href="#shop">Añadir simulaciones</a>
-            <a href="#" class="logout" onclick="confirmExit(event)">Salir</a>
+        <a href="<?= base_url(relativePath: 'modificar_producto') ?>">Modificar</a>
+
+        <a href="<?= base_url('admin/anadir-simulaciones') ?>">Añadir simulaciones</a> <!-- Enlace corregido -->
+        <a href="<?= base_url('admin/modificar-simulacion') ?>">Modificar simulación</a>
+        <a href="#" class="logout" onclick="confirmExit(event)">Salir</a>
         </div>
         <a href="<?= base_url(relativePath: 'home_admin') ?>" class="arkhip">
-            <h1>GRIP ADMIN</h1>
+            <h1>GRIP</h1>
         </a>
     </div>
 </div>
@@ -264,6 +266,7 @@ foreach ($productos as $producto) {
 $productos_ordenados = array_merge($disponibles, $agotados);
 ?>
 
+
 <section class="bg-white py-8">
     <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
         <nav class="w-full z-30 top-0 px-6 py-1" id="store">
@@ -303,10 +306,14 @@ $productos_ordenados = array_merge($disponibles, $agotados);
                     <?php if ($producto['precio_producto'] > 0): ?>
                         <?= esc($producto['precio_producto']); ?> Bs
                         <div class="pt-4 text-center">
-                        <a href="<?= isset($producto['id_producto']) ? base_url('virtual_try_on/' . esc($producto['id_producto'])) : '#'; ?>" 
-                           class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black">
-                           Probar Virtualmente
-                        </a>
+                        <a href="<?= base_url('simulacion/' . esc($producto['id_productos'])); ?>" 
+       class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black">
+       Probar Virtualmente
+    </a>
+
+
+
+
                     </div>  
                     <?php else: ?>
                         <span class="text-red-600">SOLD OUT</span>

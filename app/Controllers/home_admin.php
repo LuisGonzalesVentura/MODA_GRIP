@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\ProductoModel;
+use App\Models\SimulacionModel;
 
 class home_admin extends BaseController
 {
@@ -103,10 +104,14 @@ public function obtener_producto($id)
 {
     $model = new ProductoModel();
     $producto = $model->find($id);
-    
-    // Devolver el producto en formato JSON
-    return $this->response->setJSON($producto);
+
+    if ($producto) {
+        return $this->response->setJSON($producto);
+    } else {
+        return $this->response->setJSON([]);
+    }
 }
+
 public function modificar_producto()
 {
     // Verificar si la sesión está activa
@@ -164,8 +169,180 @@ public function modificar_producto()
     return redirect()->back()->with('success', 'Producto modificado exitosamente.');
 }
 
+public function eliminar_producto()
+{
+    // Verificar si la sesión está activa
+    if (!session()->get('logged_in')) {
+        return redirect()->to(base_url('login'));
+    }
+
+    // Obtener el ID del producto desde el formulario
+    $id_producto = $this->request->getPost('producto_select');
+
+    // Verificar que el producto existe
+    $model = new ProductoModel();
+    $producto = $model->find($id_producto);
+
+    if (!$producto) {
+        return redirect()->back()->with('error', 'Producto no encontrado.');
+    }
+
+    // Eliminar el producto usando el método delete() del modelo
+    if (!$model->delete($id_producto)) {
+        return redirect()->back()->with('error', 'No se pudo eliminar el producto. Intente nuevamente.');
+    }
+
+    // Redirigir con un mensaje de éxito
+    return redirect()->back()->with('success', 'Producto eliminado exitosamente.');
+}
 
 
+public function view_anadir_simulaciones()
+{
+    // Asegurarse de que la sesión esté activa
+    if (session()->get('logged_in')) {
+        $model = new ProductoModel();
+        // Obtener todos los productos de la base de datos
+        $data['productos'] = $model->findAll();  // Pasamos todos los productos a la vista
 
+        // Cargar la vista y pasarle los datos
+        return view("view_admin/anadir_simulaciones", $data);
+    } else {
+        return redirect()->to(base_url('login'));
+    }
+}
+public function anadir_simulacion()
+{
+    $simulacionModel = new SimulacionModel();
+
+    // Definir las reglas de validación sin la verificación de extensión por ahora
+    $rules = [
+        'modelo_producto' => 'uploaded[modelo_producto]|max_size[modelo_producto,71680]', // 70 MB
+        'producto_select' => 'required',
+    ];
+
+    // Validar el formulario
+    if ($this->validate($rules)) {
+        // Guardar el archivo
+        $file = $this->request->getFile('modelo_producto');
+        $fileName = $file->getRandomName();
+        $file->move('simulaciones', $fileName); // Mover a la carpeta simulaciones
+
+        // Guardar información en la base de datos
+        $data = [
+            'archivo_simulacion' => $fileName,
+            'id_productos' => $this->request->getPost('producto_select'),
+        ];
+        $simulacionModel->save($data);
+
+        return redirect()->to('/admin/anadir-simulaciones')->with('success', 'Simulación añadida correctamente.');
+    } else {
+        // Depuración: muestra información sobre el archivo
+        $file = $this->request->getFile('modelo_producto');
+        if ($file->isValid()) {
+            $fileType = $file->getClientMimeType(); // Tipo MIME
+            $fileName = $file->getClientName(); // Nombre del archivo
+            log_message('debug', "Archivo subido: Nombre - $fileName, Tipo MIME - $fileType");
+        } else {
+            log_message('debug', 'Archivo no es válido: ' . $file->getErrorString());
+        }
+
+        return redirect()->to('/admin/anadir-simulaciones')->withInput()->with('error', $this->validator->getErrors());
+    }
+}
+public function view_modificar_simulaciones()
+{
+    // Asegurarse de que la sesión esté activa
+    if (session()->get('logged_in')) {
+        $simulacionModel = new SimulacionModel();
+        $productoModel = new ProductoModel();
+
+        // Obtener todas las simulaciones de la base de datos
+        $data['simulaciones'] = $simulacionModel->findAll();  // Pasamos todas las simulaciones a la vista
+
+        // Obtener todos los productos de la base de datos
+        $data['productos'] = $productoModel->findAll(); // Pasamos todos los productos a la vista
+
+        // Cargar la vista y pasarle los datos
+        return view("view_admin/modificar_simulacion", $data);
+    } else {
+        return redirect()->to(base_url('login'));
+    }
+}
+
+
+public function modificar_simulacion()
+    {
+        $simulacionModel = new SimulacionModel();
+
+        // Definir las reglas de validación
+        $rules = [
+            'modelo_producto' => 'uploaded[modelo_producto]|max_size[modelo_producto,71680]', // 70 MB
+            'simulacion_id' => 'required'
+        ];
+
+        // Validar el formulario
+        if ($this->validate($rules)) {
+            // Obtener el ID de la simulación
+            $simulacionId = $this->request->getPost('simulacion_id');
+
+            // Obtener la simulación existente
+            $simulacion = $simulacionModel->find($simulacionId);
+            if (!$simulacion) {
+                return redirect()->to('/admin/modificar-simulaciones')->with('error', 'Simulación no encontrada.');
+            }
+
+            // Verificar si se subió un nuevo archivo
+            $file = $this->request->getFile('modelo_producto');
+            if ($file && $file->isValid()) {
+                // Guardar el nuevo archivo
+                $fileName = $file->getRandomName();
+                $file->move(FCPATH . 'simulaciones', $fileName); // Mover a la carpeta simulaciones
+                
+                // Eliminar el archivo antiguo si es necesario
+                if (file_exists('simulaciones/' . $simulacion['archivo_simulacion'])) {
+                    unlink('simulaciones/' . $simulacion['archivo_simulacion']); // Eliminar el archivo antiguo
+                }
+                
+                // Actualizar la información en la base de datos
+                $data = [
+                    'archivo_simulacion' => $fileName,
+                    'id_productos' => $simulacion['id_productos'] // Mantener el ID del producto asociado
+                ];
+                $simulacionModel->update($simulacionId, $data);
+            }
+
+            return redirect()->to(base_url('admin/modificar-simulacion'))->with('success', 'Simulación modificada correctamente.');
+        } else {
+            return redirect()->to(base_url('admin/modificar-simulacion'))->withInput()->with('error', $this->validator->getErrors());
+        }
+    }
+    public function eliminar_simulacion()
+{
+    $simulacionModel = new SimulacionModel();
+    $simulacionId = $this->request->getPost('simulacion_id');
+    
+    if ($simulacionId) {
+        // Eliminar la simulación de la base de datos
+        if ($simulacionModel->delete($simulacionId)) {
+            // Redirigir a la misma pantalla con un mensaje de éxito
+            return redirect()->to('admin/modificar-simulacion')->with('success', 'Simulación eliminada correctamente.');
+        } else {
+            // Redirigir a la misma pantalla con un mensaje de error
+            return redirect()->to('admin/modificar-simulacion')->with('error', 'Error al eliminar la simulación.');
+        }
+    } else {
+        // Redirigir a la misma pantalla con un mensaje de error
+        return redirect()->to('admin/modificar-simulacion')->with('error', 'ID de simulación no proporcionado.');
+    }
+}
+
+
+    
 
 }
+
+
+
+
+
