@@ -1,60 +1,81 @@
-# CodeIgniter 4 Framework
+Proyecto de Simulación de Prendas en Línea
+Descripción del Proyecto
+Este proyecto es un sistema de simulación de prendas en línea que permite a los usuarios probar prendas virtualmente en 3D. El sistema está desarrollado en PHP usando el framework CodeIgniter 4 y se ejecuta en un entorno local con XAMPP. El objetivo principal es proporcionar una experiencia de compra interactiva y atractiva que permita a los usuarios visualizar las prendas en tiempo real antes de comprarlas.
 
-## What is CodeIgniter?
+Requisitos del Sistema
+PHP: Versión 8.1 o superior
+Extensiones necesarias:
+intl
+mbstring
+json (habilitada por defecto)
+mysqlnd para bases de datos MySQL
+libcurl para solicitudes HTTP con CURL
+XAMPP: Para proporcionar un entorno de desarrollo local que incluya Apache y MySQL.
+Instalación
+1. Clonar el Proyecto
+Clona el repositorio del proyecto en la carpeta de proyectos de tu instalación de XAMPP (htdocs):
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+bash
+Copiar código
+cd C:\xampp\htdocs
+git clone gh repo clone LuisGonzalesVentura/MODA_GRIP
+cd <MODA_GRIP>
+2. Configuración del Servidor Web
+Este proyecto está estructurado con el archivo index.php dentro de la carpeta public para mejorar la seguridad. Configura el servidor web para apuntar a la carpeta public como la raíz del documento.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+3. Configuración de CodeIgniter
+Copia el archivo .env.example y renómbralo a .env.
+Configura las variables de entorno necesarias en el archivo .env, en particular:
+La conexión a la base de datos:
+arduino
+Copiar código
+ 'DSN'          => '',
+        'hostname'     => 'localhost',
+        'username'     => 'root',
+        'password'     => '',
+        'database'     => 'grip_base',
+        'DBDriver'     => 'MySQLi',
+        'DBPrefix'     => '',
+        'pConnect'     => false,
+        'DBDebug'      => true,
+        'charset'      => 'utf8mb4',
+        'DBCollat'     => 'utf8mb4_general_ci',
+        'swapPre'      => '',
+        'encrypt'      => false,
+        'compress'     => false,
+        'strictOn'     => false,
+        'failover'     => [],
+        'port'         => 3306,
+        'numberNative' => false,
+        'dateFormat'   => [
+            'date'     => 'Y-m-d',
+            'datetime' => 'Y-m-d H:i:s',
+            'time'     => 'H:i:s',
+        ],
+Otras configuraciones relevantes, como el modo de desarrollo (CI_ENVIRONMENT = development).
+4. Configuración de Base de Datos
+Abre el panel de XAMPP y asegúrate de que el servidor MySQL esté en ejecución.
+Crea una base de datos en phpMyAdmin con el nombre que especificaste en el archivo .env.
+Ejecuta el archivo SQL de configuración de la base de datos (si existe) en phpMyAdmin para crear las tablas necesarias.
+5. Instalación de Dependencias
+Este proyecto utiliza Composer para la gestión de dependencias. Ejecuta el siguiente comando en la raíz del proyecto para instalar las dependencias:
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+bash
+Copiar código
+composer install
+6. Inicio del Servidor
+Una vez que se hayan configurado todos los archivos y las dependencias, inicia el servidor local desde el panel de XAMPP. Luego, accede al sistema en tu navegador en http://localhost/<MODA_GRIP>/public.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+Estructura del Proyecto
+app/: Carpeta principal de la aplicación donde se encuentran los controladores, modelos, y vistas.
+public/: Contiene el archivo index.php y otros recursos públicos como imágenes y archivos CSS.
+writable/: Carpeta utilizada para el almacenamiento temporal y la gestión de logs de la aplicación.
+.env: Archivo de configuración de entorno (especifica credenciales de base de datos y otros parámetros del entorno).
+Ejecución de Pruebas
+Para ejecutar pruebas unitarias en este proyecto, asegúrate de que Jest y Mocha están instalados en tu entorno. Luego, ejecuta los comandos de prueba en la terminal:
 
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Contributing
-
-We welcome contributions from the community.
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+bash
+Copiar código
+npm test
+Mantenimiento
+El proyecto está alojado en GitHub para facilitar la colaboración y el control de versiones. Las instrucciones para la instalación y configuración también están documentadas en el archivo README en GitHub para facilitar el proceso a otros desarrolladores.
