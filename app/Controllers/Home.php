@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\ProductoModel;
+use App\Models\SimulacionModel;
 
 class Home extends BaseController
 {
@@ -19,19 +20,26 @@ class Home extends BaseController
 
     public function view_simulacion($id_productos): string
     {
-        // Cargar el modelo de productos
+        // Cargar el modelo de productos y simulaciones
         $productoModel = new ProductoModel();
-
-        // Obtener el producto por ID
+        $simulacionModel = new SimulacionModel();
+    
+        // Obtener el producto y la simulación asociados por ID
         $producto = $productoModel->find($id_productos);
-
-        // Verificar si el producto existe
-        if (!$producto) {
-            return redirect()->to('/')->with('error', 'Producto no encontrado.');
+        $simulacion = $simulacionModel->where('id_productos', $id_productos)->first();
+    
+        // Verificar si el producto o la simulación no existen
+        if (!$producto || !$simulacion) {
+            return redirect()->to('/')->with('error', 'Producto o simulación no encontrado.');
         }
-
-        // Pasar el producto a la vista
-        return view('simulacion_de_prendas', ['producto' => $producto]);
+    
+        // Pasar el producto y el archivo de simulación a la vista
+        return view('simulacion_de_prendas', [
+            'producto' => $producto,
+            'archivo_simulacion' => $simulacion['archivo_simulacion']
+        ]);
     }
-  
+    
+
+    
 }

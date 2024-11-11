@@ -156,9 +156,7 @@
         <button type="submit" class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800">Submit</button>
     </div>
 </form>
-
             </div>
-
            <!-- Imagen del producto a la derecha -->
     <div class="w-1/3 flex justify-center">
         <img id="productPreview" src="https://static.vecteezy.com/system/resources/previews/016/017/372/non_2x/image-upload-free-png.png" alt="Producto" class="product-img">

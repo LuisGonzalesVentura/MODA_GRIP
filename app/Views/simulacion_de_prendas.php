@@ -230,30 +230,42 @@
     </div>
 </div>
 
-
-
 <div class="container2">
-        <div class="shirt-section">
-            <img src="<?= base_url('imagenes_producto/imgs/' . esc($producto['imagen_producto'])); ?>" 
-                 alt="<?= esc($producto['nombre_producto']); ?>" 
-                 class="shirt-image">
+    <div class="shirt-section">
+        <img src="<?= base_url('imagenes_producto/imgs/' . esc($producto['imagen_producto'])); ?>" 
+             alt="<?= esc($producto['nombre_producto']); ?>" 
+             class="shirt-image">
 
-            <div>
-                <button type="button" 
-                        class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
-                        id="verModeloBtn" 
-                        style="margin-top: 20px;">
-                    VER EN 3D
-                </button>
-            </div>
+        <div>
+            <button type="button" 
+                    class="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
+                    id="verModeloBtn" 
+                    style="margin-top: 20px;">
+                VER EN 3D
+            </button>
+            <button type="button" 
+                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md text-sm shadow-lg shadow-black" 
+                    id="apagarModeloBtn" 
+                    style="margin-top: 20px; display: none;">
+                DESACTIVAR
+            </button>
         </div>
     </div>
+</div>
+
+
 
 
     <div id="modeloContenedor"></div> <!-- Contenedor para el modelo 3D -->
 
     </section>
     <!-- Fin código cámara -->
+    <script>
+    // Asegúrate de que la URL apunta a /simulaciones/
+    const archivoSimulacion = "<?= base_url('/simulaciones/' . $archivo_simulacion) ?>";
+    console.log("URL del archivo de simulación:", archivoSimulacion);
+</script>
+
 
     <video id="video" playsinline style="display: none;"></video>
     <canvas id="output"></canvas>
@@ -302,37 +314,39 @@
     }
 
     async function initThreeJS() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, 640 / 570, 0.1, 1000);
-        renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(640, 570); // Establecer el tamaño del renderer
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, 640 / 570, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(640, 570); // Establecer el tamaño del renderer
 
-        document.body.appendChild(renderer.domElement);
-        camera.position.set(0, 1, 3);
+    document.body.appendChild(renderer.domElement);
+    camera.position.set(0, 1, 3);
 
-        // ** Luces **
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Luz ambiental suave
-        scene.add(ambientLight);
+    // ** Luces **
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Luz ambiental suave
+    scene.add(ambientLight);
 
-        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional
-        directionalLight1.position.set(1, 1, 1).normalize();
-        scene.add(directionalLight1);
+    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1); // Luz direccional
+    directionalLight1.position.set(1, 1, 1).normalize();
+    scene.add(directionalLight1);
 
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.7); // Otra fuente de luz direccional
-        directionalLight2.position.set(-1, 1, -1).normalize();
-        scene.add(directionalLight2);
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.7); // Otra fuente de luz direccional
+    directionalLight2.position.set(-1, 1, -1).normalize();
+    scene.add(directionalLight2);
 
-        const loader = new THREE.GLTFLoader();
-        loader.load('/assets/oversize.glb', function(gltf) {
-            model = gltf.scene;
-            model.scale.set(5, 5, 5); // Reducido para que se ajuste mejor a la vista de la cámara
-            model.rotation.y = Math.PI;
-            scene.add(model);
-            console.log("Modelo cargado y agregado a la escena");
-        }, undefined, function(error) {
-            console.error("Error al cargar el modelo:", error);
-        });
-    }
+    // Cargar el modelo desde la URL de la base de datos
+    const loader = new THREE.GLTFLoader();
+    loader.load(archivoSimulacion, function(gltf) {
+        model = gltf.scene;
+        model.scale.set(5, 5, 5); // Ajustar el tamaño del modelo
+        model.rotation.y = Math.PI;
+        scene.add(model);
+        console.log("Modelo cargado y agregado a la escena");
+    }, undefined, function(error) {
+        console.error("Error al cargar el modelo:", error);
+    });
+}
+
 
 
   // Variable global para el factor de ajuste de rotación
@@ -532,9 +546,11 @@ function animate() {
 <!-- Asegúrate de incluir OrbitControls antes de tu script principal -->
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r128/examples/js/controls/OrbitControls.js"></script>
 
+
 <script>
     // Variables globales
     let escena3D, camara3D, renderizador3D, modelo3D, controles;
+    let animacionId; // Añadido para almacenar el ID de la animación
 
     function inicializarEscena() {
         escena3D = new THREE.Scene();
@@ -573,19 +589,20 @@ function animate() {
 
     function cargarModelo3D() {
         const cargadorGLTF = new THREE.GLTFLoader();
-        cargadorGLTF.load('/assets/oversized_t-shirt (1).glb', function(gltf) {
+        console.log("Cargando modelo desde:", archivoSimulacion);
+        cargadorGLTF.load(archivoSimulacion, function(gltf) {
             modelo3D = gltf.scene;
             modelo3D.scale.set(8, 8, 8);
             modelo3D.position.set(0, -10.1, 0);
             escena3D.add(modelo3D);
-            animarModelo();
+            animarModelo(); // Asegurarse de iniciar la animación al cargar el modelo
         }, undefined, function(error) {
             console.error("Error al cargar el modelo:", error);
         });
     }
 
     function animarModelo() {
-        requestAnimationFrame(animarModelo);
+        animacionId = requestAnimationFrame(animarModelo);
         if (modelo3D) {
             modelo3D.rotation.y += 0.01; // Rotación opcional
         }
@@ -598,22 +615,43 @@ function animate() {
         renderizador3D.render(escena3D, camara3D);
     }
 
-    document.getElementById('verModeloBtn').addEventListener('click', function() {
-        const modeloContenedor = document.getElementById('modeloContenedor');
-        modeloContenedor.style.display = 'block'; // Mostrar el contenedor del modelo
-        inicializarEscena(); // Inicializar la escena
-        cargarModelo3D(); // Cargar el modelo
-    });
+  // Función para ver el modelo 3D
+document.getElementById('verModeloBtn').addEventListener('click', function() {
+    const modeloContenedor = document.getElementById('modeloContenedor');
+    modeloContenedor.style.display = 'block'; // Mostrar el contenedor del modelo
+    inicializarEscena(); // Inicializar la escena
+    cargarModelo3D(); // Cargar el modelo
 
-    // Ajustar la escena al redimensionar la ventana
-    window.addEventListener('resize', function() {
-        if (camara3D) {
-            camara3D.aspect = 330 / 330;
-            camara3D.updateProjectionMatrix();
-            renderizador3D.setSize(330, 330);
-        }
-    });
+    // Cambiar botones
+    this.style.display = 'none'; // Ocultar botón de ver en 3D
+    document.getElementById('apagarModeloBtn').style.display = 'inline-block'; // Mostrar botón de apagar cámara
+});
+
+// Función para apagar el modelo (ocultar y limpiar)
+document.getElementById('apagarModeloBtn').addEventListener('click', function() {
+    // Detener la animación
+    cancelAnimationFrame(animacionId); // Detener la animación
+
+    // Limpiar el modelo y la escena
+    if (modelo3D) {
+        escena3D.remove(modelo3D); // Eliminar el modelo de la escena
+        modelo3D = null; // Limpiar referencia al modelo
+    }
+
+    const modeloContenedor = document.getElementById('modeloContenedor');
+    modeloContenedor.style.display = 'none'; // Ocultar el contenedor del modelo
+
+    // Cambiar botones
+    this.style.display = 'none'; // Ocultar botón de apagar cámara
+    document.getElementById('verModeloBtn').style.display = 'inline-block'; // Mostrar botón de ver en 3D
+});
+
+
+
+
 </script>
+
+
 
 
 
